@@ -1,0 +1,97 @@
+package auth;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class FrontendRegister {
+
+    public static void main(String[] args) {
+
+        // Set the path to the FirefoxDriver executable
+        System.setProperty(
+                "Webdriver.gecko.driver",
+                "c:\\geckodriver-v0.33.3-win32\\geckodriver.exe"
+        );
+
+        // Set the path to the Firefox installed Location
+        System.setProperty("Webdriver.firefox.bin", "c:\\ProgramFiles\\Mozilla Firefox\\firefox.exe");
+
+        // Create a new instance of the FirefoxDriver
+        WebDriver driver = new FirefoxDriver();
+
+        // Navigate to a webpage
+        // open google
+        driver.get("http://192.168.1.164:8000/");
+
+        // Perform further actions as needed
+        try {
+            // wait for 10 seconds after logging in
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Locate the login button and click it
+        WebElement loginButton = driver.findElement(
+                By.xpath("/html/body/header/div[3]/div/div/div[2]/div[2]/div/div[5]/a[2]")
+        );
+
+        loginButton.click();
+
+        // Perform further actions as needed
+        try {
+            // wait for 10 seconds after logging in
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        WebElement registerButton = driver.findElement(
+                By.xpath("/html/body/main/section/div/div/p[2]/a")
+        );
+
+        registerButton.click();
+
+        // Perform further actions as needed
+        try {
+            // wait for 10 seconds after logging in
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Find the email and password input fields
+        WebElement emailInput = driver.findElement(By.name("email"));
+        Select selectGender = new Select(driver.findElement(By.name("gender")));
+        WebElement passwordInput = driver.findElement(By.name("password1"));
+        WebElement confirmPasswordInput = driver.findElement(By.name("password2"));
+
+        // Enter your login credentials
+        String username = "arthi@gmail.com";
+        String gender = "Female";
+        String password = "arthi";
+
+
+        emailInput.sendKeys(username);
+        selectGender.selectByVisibleText(gender);
+        passwordInput.sendKeys(password);
+        confirmPasswordInput.sendKeys(password);
+
+        // Submit the login form
+        passwordInput.sendKeys(Keys.RETURN);
+
+        // Perform further actions as needed
+        try {
+            // wait for 10 seconds after logging in
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+}

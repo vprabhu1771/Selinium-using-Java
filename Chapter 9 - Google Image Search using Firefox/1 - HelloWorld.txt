@@ -1,0 +1,48 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
+public class HelloWorld {
+
+    public static void main(String[] args) {
+
+        // Set the path to the FirefoxDriver executable
+        System.setProperty(
+                "webdriver.gecko.driver",
+                "C:\\geckodriver-v0.32.2-win32\\geckodriver.exe"
+        );
+
+        // Set the path to the Firefox Installed Location
+        System.setProperty("webdriver.firefox.bin", "C:\\Program Files\\Mozilla Firefox\\firefox.exe");
+
+        // Create a new instance of the FirefoxDriver
+        WebDriver driver = new FirefoxDriver();
+
+        // Navigate to a webpage
+        // Open Google
+        driver.get("https://www.google.com");
+
+        // Click on the "Images" tab
+        WebElement imagesTab = driver.findElement(By.linkText("Images"));
+
+        imagesTab.click();
+
+        // Search for dog images
+        WebElement searchImagesInput = driver.findElement(By.name("q"));
+
+        searchImagesInput.clear();
+
+        searchImagesInput.sendKeys("dog image");
+
+        searchImagesInput.sendKeys(Keys.RETURN);
+
+        // Close the browser
+        //driver.quit();
+    }
+}

@@ -1,0 +1,117 @@
+package product;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class BackendProductEntry {
+
+    // Create a new instance of the FirefoxDriver
+    private static WebDriver driver  = new FirefoxDriver();
+
+    public static void main(String[] args) {
+
+        // Set the path to the FirefoxDriver exceutable
+        System.setProperty(
+                "Webdriver.gecko.driver",
+                "c://geckodriver-v0.33.3-win32//geckodriver.exe"
+        );
+
+        // Navigate to the Django Admin login page
+        driver.get("http://192.168.1.164:8000/admin/");
+
+        // Find the usernme and password fields and enter your credentials
+
+        WebElement usernameField = driver.findElement(By.name("username"));
+
+        WebElement passwordField = driver.findElement(By.name("password"));
+
+        usernameField.sendKeys("admin@gmail.com");
+        passwordField.sendKeys("admin");
+
+        // Find the login button and click it
+        WebElement loginButton = driver.findElement(By.xpath("/html/body/div/div[2]/div/div[1]/div/form/div[3]/input"));
+
+        loginButton.click();
+
+        // Wait for the page to load
+        // Add necessary code to wait for the page to load
+
+        // Navigate to the Category model admin page
+        driver.get("http://192.168.1.164:8000/admin/backend/product/");
+
+        saveProduct("Onion", "100", "50");
+
+        saveProduct("Avain Milk", "50", "30");
+
+        saveProduct("MarrieGold", "30","15");
+
+        saveProduct("Fogg", "250", "190");
+
+        saveProduct("Colgate", "50", "35");
+
+        saveProduct("Apple", "150", "100");
+
+        saveProduct("Dogs Rope", "500", "300");
+
+        saveProduct("Dairymilk", "300", "150");
+
+        saveProduct("Bread", "50", "25");
+
+        saveProduct("7up", "60", "30");
+
+    }
+
+    private static void saveProduct(String name, String original_price, String offer_price)
+    {
+        // Find the "Add Product" button and click it
+        WebElement addProductButton = driver.findElement(By.
+                xpath("/html/body/div/div[2]/div/div[1]/div/ul/li/a"));
+
+
+        addProductButton.click();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Find the name field and enter the product name
+        WebElement nameField = driver.findElement(By.name("name"));
+
+        nameField.sendKeys(name);
+
+        // Find the Original field and enter the original price
+        WebElement originalPriceField = driver.findElement(By.name("original_price"));
+
+        originalPriceField.sendKeys(Keys.CONTROL + "a");
+
+        originalPriceField.sendKeys(Keys.DELETE);
+
+        originalPriceField.sendKeys(original_price);
+
+        // Find the Offer field and enter the original price
+        WebElement offerPriceField = driver.findElement(By.name("price"));
+
+        offerPriceField.sendKeys(Keys.CONTROL + "a");
+
+        offerPriceField.sendKeys(Keys.DELETE);
+
+        offerPriceField.sendKeys(offer_price);
+
+        // Find the "save" button and click it
+        WebElement savebutton = driver.findElement(By.name("_save"));
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        savebutton.click();
+
+    }
+}

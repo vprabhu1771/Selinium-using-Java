@@ -1,0 +1,44 @@
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.apache.commons.io.FileUtils;
+import java.io.File;
+
+public class ScreenshotExample {
+
+    // Create a new instance of the FirefoxDriver
+    private static WebDriver driver  = new FirefoxDriver();
+
+    public static void main(String[] args) {
+        
+	// Set the path to the FirefoxDriver exceutable
+        System.setProperty(
+                "Webdriver.gecko.driver",
+                "c://geckodriver-v0.33.3-win32//geckodriver.exe"
+        );
+
+        // Navigate to a web page
+        driver.get("https://www.google.com");
+
+        // Take the screenshot and save it as a file
+        File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+
+        try {
+            // Specify the destination path and file name
+            File destinationFile = new File("D:/screenshot.png");
+
+            // Copy the screenshot file to the destination
+            FileUtils.copyFile(screenshotFile, destinationFile);
+
+            System.out.println("Screenshot saved: " + destinationFile.getAbsolutePath());
+
+        } catch (Exception e) 
+	{
+            System.out.println("Failed to capture screenshot: " + e.getMessage());
+        }
+
+        // Close the browser
+        driver.quit();
+    }
+}

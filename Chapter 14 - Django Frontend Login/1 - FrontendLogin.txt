@@ -1,0 +1,74 @@
+package auth;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class FrontendLogin {
+
+    public static void main(String[] args) {
+        // Set the path to the FirefoxDriver excuetable
+        System.setProperty(
+                "Webdriver.gecko.driver",
+                "c://geckodriver-v0.33.3-win32//geckodriver.exe"
+        );
+
+        System.setProperty("Webdriver.firefox.bin", "c:\\ProgramFiles\\Mozilla Firefox\\firefox.exe");
+
+        // Create a new instance of the FirefoxDriver
+        WebDriver driver = new FirefoxDriver();
+
+        // navigate to a webpage
+        driver.get("http://192.168.1.164:8000/");
+
+        // Perform further actions as needed
+        try {
+            // wait for 10 seconds after logging in
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Locate the logoin button and click it
+        WebElement loginButton = driver.findElement(
+                By.xpath("/html/body/header/div[3]/div/div/div[2]/div[2]/div/div[5]/a[2]")
+        );
+
+        loginButton.click();
+
+
+        // Perform further actions as needed
+        try {
+            // wait for 10 seconds after logging in
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Find the username and password input fields
+        WebElement usernameInput = driver.findElement(By.name("username"));
+        WebElement passwordInput = driver.findElement(By.name("password"));
+
+        // Enter your login credentials
+        String username = "admin@gmail.com";
+        String password = "admin";
+
+        usernameInput.sendKeys(username);
+        passwordInput.sendKeys(password);
+
+        // Submit the login form
+        passwordInput.sendKeys(Keys.RETURN);
+
+        // Perform further actions as needed
+        try {
+            // wait for 10 seconds after logging in
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+}
